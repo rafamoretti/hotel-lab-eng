@@ -1,0 +1,7 @@
+backend/.vs/
+frontend/.vs/
+
+*.obj
+obj/
+
+bin/
