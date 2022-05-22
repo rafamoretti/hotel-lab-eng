@@ -1,7 +1,11 @@
+.vscode/
 backend/.vs/
+backend/AppConfig/AppDbContext.cs
+
 frontend/.vs/
 
 *.obj
 obj/
 
 bin/
+backend/backend.csproj.user
