@@ -20,7 +20,7 @@ namespace Assets
             {
                 foreach (var targProp in targetProperties)
                 {
-                    if (props == targProp)
+                    if (props.Name == targProp.Name)
                     {
                         targProp.SetValue(targetObjInstance, props.GetValue(source));
                     }
