@@ -1,0 +1,15 @@
+* {
+    font-family: 'Poppins', monospace;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 21px;
+    line-height: 32px;
+}
+
+input {
+    border: 2px solid #FFF1DE;;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+
+

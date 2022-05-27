@@ -1,0 +1,249 @@
+.Home {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    background: #FFF1DE;
+    z-index: 2;
+}
+
+.quartos {
+    color: #2D2329;
+}
+
+.quartos h2{
+    position: absolute;
+    width: 151px;
+    height: 54px;
+    left: 363px;
+    top: 60px;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 54px;
+}
+
+.btn-num {
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 48px;
+    color: #FFFFFF;
+    background: none;
+    border: none;
+    cursor: pointer
+}
+
+.quartos div {
+    position: absolute;
+    width: 166px;
+    height: 120px;
+    background: #2D2329;
+    border-radius: 4px;
+}
+
+
+.marker {
+    position: absolute;
+    left: 20px;
+    top: 80px;
+    width: 129px;
+    height: 27px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.q101 {
+    left: 363px;
+    top: 181px;
+}
+.q101 span {
+    background: #91BBA6;
+}
+
+.q102 {
+    left: 554px;
+    top: 181px;
+}
+.q102 span {
+    background: #FF6584;
+}
+
+.q103 {
+    left: 745px;
+    top: 181px;
+}
+.q103 span {
+    background: #91BBA6;
+}
+
+.q104 {
+    left: 936px;
+    top: 181px;
+}
+.q104 span {
+    background: #D5864E;
+}
+
+.q105 {
+    left: 1127px;
+    top: 181px;
+}
+.q105 span {
+    background: #91BBA6;
+}
+
+.q106 {
+    left: 363px;
+    top: 325px;
+}
+.q106 span {
+    background: #91BBA6;
+}
+
+.q107 {
+    left: 554px;
+    top: 325px;
+}
+.q107 span {
+    background: #D5864E;
+}
+
+.q108 {
+    left: 745px;
+    top: 325px;
+}
+.q108 span {
+    background: #91BBA6;
+}
+
+.q109 {
+    left: 936px;
+    top: 325px;
+}
+.q109 span {
+    background: #FF6584;
+}
+
+.q110 {
+    left: 1127px;
+    top: 325px;
+}
+.q110 span {
+    background: #91BBA6;
+}
+
+.q111 {
+    left: 363px;
+    top: 469px;
+}
+.q111 span {
+    background: #D5864E;
+}
+
+.q112 {
+    left: 554px;
+    top: 469px;
+}
+.q112 span {
+    background: #91BBA6;
+}
+
+.q113 {
+    left: 745px;
+    top: 469px;
+}
+.q113 span {
+    background: #91BBA6;
+}
+
+.q114 {
+    left: 936px;
+    top: 469px;
+}
+.q114 span {
+    background: #91BBA6;
+}
+
+.q115 {
+    left: 1127px;
+    top: 469px;
+}
+.q115 span {
+    background: #FF6584;
+}
+
+.modal, .overlay {
+    width: 100vw;
+    height: 100vh;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    position: absolute;
+    z-index: 5;
+}
+
+.overlay {
+    backdrop-filter: brightness(40%);
+}
+
+.modal-content {
+    background: #FFF1DE;
+    position: center;
+    width: 300px;
+    
+    top: 320px;
+    
+    padding: 14px 28px;
+    border-radius: 4px;
+    z-index: 6;
+}
+
+.modal-content small{
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 30px;
+
+    color: #8B8B8B;
+}
+
+.modal-content h2{
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 48px;
+}
+
+.modal-content select {
+    box-sizing: border-box;
+    position: relative;
+    width: 270px;
+    height: 43px;
+    border: 2px solid #2D2329;
+    color: #FAFAFA;
+    
+    border-radius: 4px;
+    background: #2D2329;
+    cursor: pointer;
+    
+}
+
+.btn {
+    width: 270px;
+    height: 43px;
+
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 5px 7px;
+    background: #D5864E;
+    border: 2px solid #D5864E;
+    transition: 0.4s;
+    cursor: pointer;
+    color: #FFF1DE;
+}
+
+.btn:hover {
+    background: #a1653a;
+    border: 2px solid #a1653a;
+}

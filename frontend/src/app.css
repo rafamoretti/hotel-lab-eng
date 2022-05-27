@@ -1,0 +1,67 @@
+.App {
+    color: #D8D8D8;
+    background: #2D2329;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+}
+
+.form-group-email {
+    position: absolute;
+    width: 359px;
+    height: 48px;
+    left: 143px;
+    top: 300px;
+    border-color: #D8D8D8;
+}
+
+.form-group-senha {
+    position: absolute;
+    width: 359px;
+    height: 48px;
+    left: 143px;
+    top: 350px;
+}
+
+form .form-inner input[type="submit"] {
+    position: absolute;
+    width: 260px;
+    height: 48px;
+    left: 143px;
+    top: 400px;
+    color: #FFF1DE;
+    background: #D5864E;
+    border: 2px solid #D5864E;
+    transition: 0.4s;
+    cursor: pointer;
+}
+
+form .form-inner input[type="submit"]:hover {
+    background: #a1653a;
+    border: 2px solid #a1653a;
+}
+
+form .form-inner h2{
+     visibility: hidden;
+}
+
+.logout {
+    background: none;
+    border: none;
+    position: absolute;
+    width: 43px;
+    height: 32px;
+    left: 49px;
+    top: 600px;
+    font-weight: 700;
+    font-size: 21px;
+    line-height: 32px;
+    cursor: pointer;
+    color: #D5864E;
+    z-index: 4;
+}

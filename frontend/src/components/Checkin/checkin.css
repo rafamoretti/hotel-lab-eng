@@ -1,0 +1,106 @@
+.Checkin {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    background: #FFF1DE;
+    z-index: 2;
+}
+
+.checkin-form {
+    color: #2D2329;
+}
+
+.checkin-form h2 {
+    position: absolute;
+    height: 54px;
+    left: 363px;
+    top: 60px;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 54px;
+}
+
+.inner-form {
+    position: absolute;
+    width: 733px;
+    height: 377px;
+    left: 363px;
+    top: 145px;
+    
+    background: #2D2329;
+    border-radius: 4px;
+
+    text-align: center;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    color: #D5864E;
+
+}
+
+.inner-form input, select{
+    box-sizing: border-box;
+    position: relative;
+    width: 270px;
+    height: 43px;
+    border: 2px solid #FAFAFA;
+    color: #FAFAFA;
+    
+    border-radius: 4px;
+    background: transparent;
+}
+
+.bloco1 {
+    position: absolute;
+    left: 50px;
+    top: 20px;
+}
+
+.bloco2{
+    position: absolute;
+    left: 400px;
+    top: 20px;
+}
+
+.inner-form input[type="submit"] {
+    background: #D5864E;
+    border: 2px solid #D5864E;
+    transition: 0.4s;
+    cursor: pointer;
+}
+
+.inner-form input[type="submit"]:hover {
+    background: #a1653a;
+    border: 2px solid #a1653a;
+}
+
+option {
+    background: #2D2329;
+}
+
+.numero {
+    position: absolute;
+    width: 449px;
+    height: 52px;
+    left: 363px;
+    top: 553px;
+
+    background: #2D2329;
+    border-radius: 4px;
+    color: #FAFAFA;
+    text-indent: 50px;
+    line-height: 50px;
+}
+
+.numero label {
+    position: absolute;
+    width: 34px;
+    height: 36px;
+    left: 300px;
+    top: 10px;
+    
+}
