@@ -1,0 +1,31 @@
+.barra-lateral {
+    position: absolute;
+    width: 290px;
+    height: 1024px;
+    left: 0px;
+    top: 0px;
+
+    background: #2D2329;
+    z-index: 3;
+}
+
+.bnt-home, .bnt-checkin{
+    background: none;
+    border: none;
+    position: absolute;
+    height: 32px;
+    left: 49px;
+    font-weight: 700;
+    font-size: 21px;
+    line-height: 32px;
+    cursor: pointer;
+    color: #FFFFFF
+}
+
+.bnt-home {
+    top: 200px;
+}
+
+.bnt-checkin {
+    top: 250px;
+}
