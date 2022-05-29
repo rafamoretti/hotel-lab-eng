@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Model;
 using Model.VewModels;
 using Repository.RepositoryInterfaces;
+using ViewModels;
 
 namespace Controllers
 {
@@ -11,11 +12,13 @@ namespace Controllers
     public class EmployeeControllers : ControllerBase
     {
         private readonly IEmployeeRepository _employeeRepository;
+        private readonly ILoginRepository _loginRepository;
         private readonly IClassReader _classReader;
 
-        public EmployeeControllers(IEmployeeRepository employeeRepository, IClassReader classReader)
+        public EmployeeControllers(IEmployeeRepository employeeRepository, ILoginRepository loginRepository, IClassReader classReader)
         {
             _employeeRepository = employeeRepository;
+            _loginRepository = loginRepository;
             _classReader = classReader;
         }
 
@@ -40,6 +43,24 @@ namespace Controllers
                 .Save();
 
             return Ok();
+        }
+
+        [HttpGet]
+        [Route("employee/auth")]
+        public IActionResult EmployeeLogin(
+            [FromBody] LoginViewModel login
+        )
+        {
+            if (login == null)
+                return BadRequest();
+
+            var employeeLogin = _classReader.ClassMapper<Employee, LoginViewModel>(login);
+            var auth = _loginRepository.GetEmployeeLogin(employeeLogin);
+
+            if (auth != false)
+                return Ok();
+
+            return BadRequest();
         }
     }
 }
