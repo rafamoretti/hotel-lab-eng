@@ -19,6 +19,11 @@ namespace Model
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public AccommodationTypeEnum Type { get; set; }
-        public double Cost { get; set; }
+        public double Cost { get; private set; }
+
+        public void SetCost(AccommodationTypeEnum type)
+        {
+            Cost = (1200 * (int)type) + 1200;
+        }
     }
 }
