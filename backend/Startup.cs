@@ -25,6 +25,7 @@ namespace backend
             services.AddScoped<IClassReader, ClassReader>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<ILoginRepository, LoginRepository>();
+            services.AddScoped<IGuestRepository, GuestRepository>();
             
             services.AddDbContext<AppDbContext>();
             services.AddControllers();
