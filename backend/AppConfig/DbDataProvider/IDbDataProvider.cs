@@ -14,7 +14,7 @@ namespace AppConfig.DbDataProvider
     {
         public MySqlConnection GetConnection()
         {
-            var connection = new MySqlConnection("server=localhost;user=root;database=hotel-lab;password=root1010;port=3306");
+            var connection = new MySqlConnection("");
             return connection;
         }
 
