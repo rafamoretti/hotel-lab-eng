@@ -1,5 +1,4 @@
 using System;
-using Model;
 using Model.Common;
 using System.Collections.Generic;
 
@@ -19,5 +18,7 @@ namespace Model
         public int Number { get; set; }
         public RoomStatusEnum Status { get; set; }
         public IEnumerable<Product> Products { get; set; }
+
+        public Guest Guest { get; set; }
     }
 }
