@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using AppConfig;
 using Model;
 using Repository.RepositoryInterfaces;
@@ -24,6 +25,14 @@ namespace Repository
                 .Add(checkIn);  
         }
         
+        public Guest GetGuest(Guid id)
+        {
+            return _context
+                        .Guests
+                        .Where(_ => _.Id == id)
+                        .FirstOrDefault();
+        }
+
         public void Save()
         {
             _context
@@ -47,5 +56,6 @@ namespace Repository
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
     }
 }
