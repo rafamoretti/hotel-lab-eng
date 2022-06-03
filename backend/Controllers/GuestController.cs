@@ -1,3 +1,4 @@
+using System;
 using Assets;
 using Microsoft.AspNetCore.Mvc;
 using Model;
@@ -41,6 +42,24 @@ namespace Controllers
                 .Save();
 
             return Ok(); 
+        }
+
+        [HttpGet]
+        [Route("employee/{id}")]
+        public IActionResult GetGuestInfo(
+            [FromRoute] Guid id
+        )
+        {
+            if (id == null)
+                return BadRequest();
+
+            var guestInfo = _guestRepository
+                                .GetGuest(id);
+
+            if (guestInfo != null)
+                return Ok(guestInfo);
+
+            return BadRequest();
         }
     }
 }
