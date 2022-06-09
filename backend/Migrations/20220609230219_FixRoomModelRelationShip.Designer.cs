@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220515202607_AddCheckinEntity")]
-    partial class AddCheckinEntity
+    [Migration("20220609230219_FixRoomModelRelationShip")]
+    partial class FixRoomModelRelationShip
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,9 +21,9 @@ namespace backend.Migrations
 
             modelBuilder.Entity("Model.CheckIn", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("int");
 
                     b.Property<double>("Cost")
                         .HasColumnType("double");
@@ -44,14 +44,17 @@ namespace backend.Migrations
 
             modelBuilder.Entity("Model.Employee", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Password")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -61,9 +64,12 @@ namespace backend.Migrations
 
             modelBuilder.Entity("Model.Guest", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("int");
+
+                    b.Property<int>("CheckInId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Cpf")
                         .HasColumnType("text");
@@ -77,16 +83,27 @@ namespace backend.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("text");
 
+                    b.Property<int?>("RoomId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("CheckInId")
+                        .IsUnique();
+
+                    b.HasIndex("RoomId");
 
                     b.ToTable("Guests");
                 });
 
             modelBuilder.Entity("Model.Product", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("int");
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
@@ -94,8 +111,8 @@ namespace backend.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("double");
 
-                    b.Property<byte[]>("RoomId")
-                        .HasColumnType("varbinary(16)");
+                    b.Property<int?>("RoomId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -106,9 +123,9 @@ namespace backend.Migrations
 
             modelBuilder.Entity("Model.Room", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("int");
 
                     b.Property<int>("Number")
                         .HasColumnType("int");
@@ -121,11 +138,33 @@ namespace backend.Migrations
                     b.ToTable("Rooms");
                 });
 
+            modelBuilder.Entity("Model.Guest", b =>
+                {
+                    b.HasOne("Model.CheckIn", "CheckIn")
+                        .WithOne("Guests")
+                        .HasForeignKey("Model.Guest", "CheckInId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Model.Room", "Room")
+                        .WithMany()
+                        .HasForeignKey("RoomId");
+
+                    b.Navigation("CheckIn");
+
+                    b.Navigation("Room");
+                });
+
             modelBuilder.Entity("Model.Product", b =>
                 {
                     b.HasOne("Model.Room", null)
                         .WithMany("Products")
                         .HasForeignKey("RoomId");
+                });
+
+            modelBuilder.Entity("Model.CheckIn", b =>
+                {
+                    b.Navigation("Guests");
                 });
 
             modelBuilder.Entity("Model.Room", b =>

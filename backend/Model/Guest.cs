@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Model
 {
@@ -14,10 +15,16 @@ namespace Model
             Cpf = cpf;
         }
 
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
         public string Cpf { get; set; }
+
+        public Room Room { get; set; }
+
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int CheckInId { get; set; }
+        public CheckIn CheckIn { get; set; }
     }
 }

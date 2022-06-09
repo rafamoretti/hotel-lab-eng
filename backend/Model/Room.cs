@@ -1,7 +1,7 @@
 using System;
-using Model;
 using Model.Common;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Model
 {
@@ -15,9 +15,9 @@ namespace Model
             Status = status;
         }
 
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public int Number { get; set; }
-        public RoomStatusEnum Status { get; set; }
+        public RoomStatusEnum Status { get; set; } = RoomStatusEnum.Available;
         public IEnumerable<Product> Products { get; set; }
     }
 }

@@ -1,8 +1,7 @@
-namespace Model.VewModels
+namespace ViewModels
 {
-    public class EmployeeViewModel
+    public class LoginViewModel
     {
-        public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
     }
