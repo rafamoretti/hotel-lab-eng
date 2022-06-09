@@ -5,10 +5,10 @@ namespace Repository.RepositoryInterfaces
 {
     public interface IEmployeeRepository : IDisposable
     {
-        public Employee GetEmployee(Guid employeeId);
+        public Employee GetEmployee(int employeeId);
         public void AddEmployee(Employee employee);
         public void UpdateEmployee(Employee employee);
-        public void RemoveEmployee(Guid employeeId); 
+        public void RemoveEmployee(int employeeId); 
         public void Save();
     }
 }

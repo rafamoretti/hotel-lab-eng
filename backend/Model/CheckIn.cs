@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Model.Common;
 
 namespace Model
@@ -15,11 +16,13 @@ namespace Model
             Cost = cost;
         }
 
-        public Guid Id { get; set; }
-        public DateTime StartDate { get; set; }
+        public int Id { get; set; }
+        public DateTime StartDate { get; set; } = DateTime.Now;
         public DateTime EndDate { get; set; }
         public AccommodationTypeEnum Type { get; set; }
         public double Cost { get; private set; }
+
+        public Guest Guests { get; set; }
 
         public void SetCost(AccommodationTypeEnum type)
         {

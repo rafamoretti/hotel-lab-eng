@@ -3,14 +3,16 @@ using System;
 using AppConfig;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220609175204_FixRelatioshipCheckInGuest")]
+    partial class FixRelatioshipCheckInGuest
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -81,7 +83,7 @@ namespace backend.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("text");
 
-                    b.Property<int?>("RoomId")
+                    b.Property<int>("RoomId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -89,7 +91,8 @@ namespace backend.Migrations
                     b.HasIndex("CheckInId")
                         .IsUnique();
 
-                    b.HasIndex("RoomId");
+                    b.HasIndex("RoomId")
+                        .IsUnique();
 
                     b.ToTable("Guests");
                 });
@@ -139,16 +142,20 @@ namespace backend.Migrations
             modelBuilder.Entity("Model.Guest", b =>
                 {
                     b.HasOne("Model.CheckIn", "CheckIn")
-                        .WithOne("Guests")
+                        .WithOne("Guest")
                         .HasForeignKey("Model.Guest", "CheckInId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Model.Room", null)
-                        .WithMany("Guests")
-                        .HasForeignKey("RoomId");
+                    b.HasOne("Model.Room", "Room")
+                        .WithOne("Guest")
+                        .HasForeignKey("Model.Guest", "RoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("CheckIn");
+
+                    b.Navigation("Room");
                 });
 
             modelBuilder.Entity("Model.Product", b =>
@@ -160,12 +167,12 @@ namespace backend.Migrations
 
             modelBuilder.Entity("Model.CheckIn", b =>
                 {
-                    b.Navigation("Guests");
+                    b.Navigation("Guest");
                 });
 
             modelBuilder.Entity("Model.Room", b =>
                 {
-                    b.Navigation("Guests");
+                    b.Navigation("Guest");
 
                     b.Navigation("Products");
                 });

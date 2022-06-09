@@ -1,23 +1,23 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
+using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
 
 namespace AppConfig.DbDataProvider
 {
-    public interface IDbDataProvider
+    public class DbConnectionProvider : IDisposable
     {
-        public MySqlConnection GetConnection();
-        public List<T> ProcessQueryResult<T>(MySqlCommand command);
-    }
+        public IDbConnection Connection { get; }
 
-    public class DbDataProvider : IDbDataProvider
-    {
-        public MySqlConnection GetConnection()
+        public DbConnectionProvider(IConfiguration configuration)
         {
-            var connection = new MySqlConnection("");
-            return connection;
+            Connection = new MySqlConnection(configuration.GetConnectionString("Default"));
         }
 
+        public void Dispose()
+            => Connection?.Dispose();
+            
         public List<T> ProcessQueryResult<T>(MySqlCommand command)
         {
             var list = new List<T>();

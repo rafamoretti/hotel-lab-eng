@@ -3,6 +3,7 @@ using System.Linq;
 using AppConfig;
 using Model;
 using Repository.RepositoryInterfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Repository
 {
@@ -10,10 +11,22 @@ namespace Repository
     {
         private bool disposed = false;
         private readonly AppDbContext _context;
+        private readonly IRoomRepository _roomRepository;
 
-        public GuestRepository(AppDbContext context)
+        public GuestRepository(AppDbContext context, IRoomRepository roomRepository)
         {
             _context = context;
+            _roomRepository = roomRepository;
+        }
+
+        private CheckIn GetCheckin(int id)
+        {
+            var checkIn = _context
+                .CheckIns
+                .Where(_ => _.Id == id)
+                .FirstOrDefault();
+
+            return checkIn;
         }
 
         public void NewCheckIn(CheckIn checkIn)
@@ -21,11 +34,18 @@ namespace Repository
             checkIn.SetCost(checkIn.Type);
             
             _context
-                .CheckIns
-                .Add(checkIn);  
+            .CheckIns
+            .Add(checkIn);
+        }
+
+        public void AddGuest(Guest guest)
+        {   
+            _context
+                .Guests
+                .Add(guest);  
         }
         
-        public Guest GetGuest(Guid id)
+        public Guest GetGuest(int id)
         {
             return _context
                         .Guests

@@ -20,23 +20,46 @@ namespace Controllers
             _classReader = classReader;
         }
 
+        // [HttpPost]
+        // [Route("guest")]
+        // public IActionResult AddGuest(
+        //     [FromBody] GuestViewModel guest
+        // )
+        // {
+        //     if (guest == null)
+        //         return BadRequest();
+            
+        //     var guestToAdd = _classReader
+        //         .ClassMapper<Guest, GuestViewModel>(guest);
+
+        //     _guestRepository
+        //         .AddGuest(guestToAdd);
+
+        //     _guestRepository
+        //         .Save();
+
+        //     return Ok();
+                
+        // }
+
         [HttpPost]
         [Route("checkin")]
         public IActionResult AddCheckIn(
-            [FromBody] CheckInViewModel checkIn
+            [FromBody] CheckIn checkIn
         )
         {
             if (checkIn == null)
                 return BadRequest();
 
-            var guestCheckIn = _classReader
-                .ClassMapper<CheckIn, CheckInViewModel>(checkIn);
+            // var guestCheckIn = _classReader
+            //     .ClassMapper<CheckIn, CheckInViewModel>(checkIn);
 
-            if (guestCheckIn == null)
-                return BadRequest();
+
+            // if (guestCheckIn == null)
+            //     return BadRequest();
 
             _guestRepository
-                .NewCheckIn(guestCheckIn);
+                .NewCheckIn(checkIn);
 
             _guestRepository
                 .Save();
@@ -47,12 +70,9 @@ namespace Controllers
         [HttpGet]
         [Route("employee/{id}")]
         public IActionResult GetGuestInfo(
-            [FromRoute] Guid id
+            [FromRoute] int id
         )
         {
-            if (id == null)
-                return BadRequest();
-
             var guestInfo = _guestRepository
                                 .GetGuest(id);
 

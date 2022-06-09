@@ -6,7 +6,7 @@ namespace Queries.QueriesInterface
 {
     public interface IRoomQueries
     {
-        public List<GuestRoomDTO> GetGuestRoom(Guid id); 
-        public List<T> ExecuteQuery<T>(string query);
+        public List<RoomData> GetGuestRoom(int id); 
+        public List<T> ExecuteQuery<T>(string query, object arguments);
     }
 }
