@@ -14,7 +14,7 @@ function App() {
     password: "admin123"
   }
 
-  const [user, setUser] = useState({email: "", password: ""});
+  const [user, setUser] = useState({email: "admin@admin.com", password: "admin123"});
   const [error, setError] = useState("");
 
   const login = details => {
