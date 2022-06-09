@@ -1,3 +1,4 @@
+using AppConfig.ModelConfiguration;
 using Microsoft.EntityFrameworkCore;
 using Model;
 
@@ -13,5 +14,15 @@ namespace AppConfig
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder.UseMySQL("");
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new RoomConfiguration());
+            modelBuilder.ApplyConfiguration(new GuestConfiguration());
+            modelBuilder.ApplyConfiguration(new CheckInConfiguration());
+            modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
+            
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

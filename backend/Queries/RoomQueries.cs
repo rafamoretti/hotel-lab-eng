@@ -1,41 +1,35 @@
 using System;
 using System.Collections.Generic;
-using AppConfig;
 using AppConfig.DbDataProvider;
-using Queries.DataTransferObjects;
 using Queries.QueriesInterface;
+using System.Linq;
+using Dapper;
 using Queries.Resources;
-using MySql.Data.MySqlClient;
-using System.Data;
+using Queries.DataTransferObjects;
 
 namespace Queries
 {
     public class RoomQueries : IRoomQueries
     {
-        private readonly IDbDataProvider _dbDataProvider;
+        private readonly DbConnectionProvider _provider;
 
-        public RoomQueries(IDbDataProvider dbDataProvider)
+        public RoomQueries(DbConnectionProvider provider)
         {
-            _dbDataProvider = dbDataProvider;
+            _provider = provider;
         }
 
-        private readonly AppDbContext _context;
-
-        public List<GuestRoomDTO> GetGuestRoom(Guid id)
+        public List<RoomData> GetGuestRoom(int id)
         {
-            return ExecuteQuery<GuestRoomDTO>(QuerieResources.RoommQuerie);
+            return ExecuteQuery<RoomData>(QuerieResources.RoommQuerie, new { Id = id });
         }
 
-        public List<T> ExecuteQuery<T>(string query)
+        public List<T> ExecuteQuery<T>(string query, object arguments)
         {
-            var conn = _dbDataProvider.GetConnection();
-            conn.Open();
-            
-            var command = new MySqlCommand();
-            command.CommandText = query;
-            command.Prepare();
-
-            return _dbDataProvider.ProcessQueryResult<T>(command);
+            using (var conn = _provider.Connection)
+            {
+                var data = conn.Query<T>(query, arguments).ToList();
+                return data;
+            }
         }
     }
 }

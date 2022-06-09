@@ -3,6 +3,7 @@ using Model;
 using AppConfig;
 using Repository.RepositoryInterfaces;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Repository
 {
@@ -16,7 +17,7 @@ namespace Repository
             _context = context;
         }
 
-        public Employee GetEmployee(Guid employeeId)
+        public Employee GetEmployee(int employeeId)
         {
             return _context
                     .Employees
@@ -30,7 +31,7 @@ namespace Repository
                 .Add(employee);
         }
 
-        public void RemoveEmployee(Guid employeeId)
+        public void RemoveEmployee(int employeeId)
         {
             var employee = _context
                             .Employees
@@ -39,7 +40,6 @@ namespace Repository
             _context
                 .Employees
                 .Remove(employee);
-                
         }
 
         public void UpdateEmployee(Employee employee)

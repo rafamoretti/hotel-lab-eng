@@ -14,11 +14,10 @@ namespace Model
             Status = status;
         }
 
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public int Number { get; set; }
-        public RoomStatusEnum Status { get; set; }
+        public RoomStatusEnum Status { get; set; } = RoomStatusEnum.Available;
         public IEnumerable<Product> Products { get; set; }
-
-        public Guest Guest { get; set; }
+        public IEnumerable<Guest> Guests { get; set; }
     }
 }
