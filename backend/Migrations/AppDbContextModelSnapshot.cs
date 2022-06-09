@@ -144,11 +144,13 @@ namespace backend.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Model.Room", null)
-                        .WithMany("Guests")
+                    b.HasOne("Model.Room", "Room")
+                        .WithMany()
                         .HasForeignKey("RoomId");
 
                     b.Navigation("CheckIn");
+
+                    b.Navigation("Room");
                 });
 
             modelBuilder.Entity("Model.Product", b =>
@@ -165,8 +167,6 @@ namespace backend.Migrations
 
             modelBuilder.Entity("Model.Room", b =>
                 {
-                    b.Navigation("Guests");
-
                     b.Navigation("Products");
                 });
 #pragma warning restore 612, 618

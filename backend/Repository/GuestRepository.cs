@@ -32,10 +32,19 @@ namespace Repository
         public void NewCheckIn(CheckIn checkIn)
         {
             checkIn.SetCost(checkIn.Type);
-            
+            checkIn.Guests.Room = LocateGuest();
+
             _context
-            .CheckIns
-            .Add(checkIn);
+                .CheckIns
+                .Add(checkIn);
+        }
+
+        public Room LocateGuest()
+        {
+            var room = _roomRepository
+                            .GetAvailableRoom();
+
+            return room;
         }
 
         public void AddGuest(Guest guest)

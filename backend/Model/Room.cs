@@ -1,6 +1,7 @@
 using System;
 using Model.Common;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Model
 {
@@ -18,6 +19,5 @@ namespace Model
         public int Number { get; set; }
         public RoomStatusEnum Status { get; set; } = RoomStatusEnum.Available;
         public IEnumerable<Product> Products { get; set; }
-        public IEnumerable<Guest> Guests { get; set; }
     }
 }

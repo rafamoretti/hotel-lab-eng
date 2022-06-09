@@ -21,6 +21,8 @@ namespace Model
         public string Phone { get; set; }
         public string Cpf { get; set; }
 
+        public Room Room { get; set; }
+
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int CheckInId { get; set; }
         public CheckIn CheckIn { get; set; }

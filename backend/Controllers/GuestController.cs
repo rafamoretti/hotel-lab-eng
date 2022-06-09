@@ -54,7 +54,6 @@ namespace Controllers
             // var guestCheckIn = _classReader
             //     .ClassMapper<CheckIn, CheckInViewModel>(checkIn);
 
-
             // if (guestCheckIn == null)
             //     return BadRequest();
 
