@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220609173008_AddedRelatioshipCheckInGuest")]
-    partial class AddedRelatioshipCheckInGuest
+    [Migration("20220609230219_FixRoomModelRelationShip")]
+    partial class FixRoomModelRelationShip
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -83,13 +83,15 @@ namespace backend.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("text");
 
-                    b.Property<int>("RoomId")
+                    b.Property<int?>("RoomId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RoomId")
+                    b.HasIndex("CheckInId")
                         .IsUnique();
+
+                    b.HasIndex("RoomId");
 
                     b.ToTable("Guests");
                 });
@@ -139,16 +141,14 @@ namespace backend.Migrations
             modelBuilder.Entity("Model.Guest", b =>
                 {
                     b.HasOne("Model.CheckIn", "CheckIn")
-                        .WithOne("Guest")
-                        .HasForeignKey("Model.Guest", "RoomId")
+                        .WithOne("Guests")
+                        .HasForeignKey("Model.Guest", "CheckInId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Model.Room", "Room")
-                        .WithOne("Guest")
-                        .HasForeignKey("Model.Guest", "RoomId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany()
+                        .HasForeignKey("RoomId");
 
                     b.Navigation("CheckIn");
 
@@ -164,13 +164,11 @@ namespace backend.Migrations
 
             modelBuilder.Entity("Model.CheckIn", b =>
                 {
-                    b.Navigation("Guest");
+                    b.Navigation("Guests");
                 });
 
             modelBuilder.Entity("Model.Room", b =>
                 {
-                    b.Navigation("Guest");
-
                     b.Navigation("Products");
                 });
 #pragma warning restore 612, 618

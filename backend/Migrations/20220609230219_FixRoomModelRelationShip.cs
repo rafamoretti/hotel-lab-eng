@@ -2,25 +2,27 @@
 
 namespace backend.Migrations
 {
-    public partial class FixModel : Migration
+    public partial class FixRoomModelRelationShip : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Guests_Rooms_RoomId",
-                table: "Guests");
+                name: "FK_Rooms_Guests_GuestId",
+                table: "Rooms");
 
             migrationBuilder.DropIndex(
-                name: "IX_Guests_RoomId",
-                table: "Guests");
+                name: "IX_Rooms_GuestId",
+                table: "Rooms");
 
-            migrationBuilder.AlterColumn<int>(
+            migrationBuilder.DropColumn(
+                name: "GuestId",
+                table: "Rooms");
+
+            migrationBuilder.AddColumn<int>(
                 name: "RoomId",
                 table: "Guests",
                 type: "int",
-                nullable: true,
-                oldClrType: typeof(int),
-                oldType: "int");
+                nullable: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Guests_RoomId",
@@ -46,29 +48,28 @@ namespace backend.Migrations
                 name: "IX_Guests_RoomId",
                 table: "Guests");
 
-            migrationBuilder.AlterColumn<int>(
+            migrationBuilder.DropColumn(
                 name: "RoomId",
-                table: "Guests",
+                table: "Guests");
+
+            migrationBuilder.AddColumn<int>(
+                name: "GuestId",
+                table: "Rooms",
                 type: "int",
-                nullable: false,
-                defaultValue: 0,
-                oldClrType: typeof(int),
-                oldType: "int",
-                oldNullable: true);
+                nullable: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Guests_RoomId",
-                table: "Guests",
-                column: "RoomId",
-                unique: true);
+                name: "IX_Rooms_GuestId",
+                table: "Rooms",
+                column: "GuestId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Guests_Rooms_RoomId",
-                table: "Guests",
-                column: "RoomId",
-                principalTable: "Rooms",
+                name: "FK_Rooms_Guests_GuestId",
+                table: "Rooms",
+                column: "GuestId",
+                principalTable: "Guests",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Restrict);
         }
     }
 }

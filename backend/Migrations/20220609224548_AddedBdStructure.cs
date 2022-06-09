@@ -4,7 +4,7 @@ using MySql.EntityFrameworkCore.Metadata;
 
 namespace backend.Migrations
 {
-    public partial class DbStructure : Migration
+    public partial class AddedBdStructure : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -63,24 +63,32 @@ namespace backend.Migrations
                     Email = table.Column<string>(type: "text", nullable: true),
                     Phone = table.Column<string>(type: "text", nullable: true),
                     Cpf = table.Column<string>(type: "text", nullable: true),
-                    RoomId = table.Column<int>(type: "int", nullable: false)
+                    RoomId = table.Column<int>(type: "int", nullable: true),
+                    CheckInId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Guests", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_Guests_CheckIns_CheckInId",
+                        column: x => x.CheckInId,
+                        principalTable: "CheckIns",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_Guests_Rooms_RoomId",
                         column: x => x.RoomId,
                         principalTable: "Rooms",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
-                    Id = table.Column<byte[]>(type: "varbinary(16)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(type: "text", nullable: true),
                     Amount = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<double>(type: "double", nullable: false),
@@ -98,10 +106,15 @@ namespace backend.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Guests_CheckInId",
+                table: "Guests",
+                column: "CheckInId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Guests_RoomId",
                 table: "Guests",
-                column: "RoomId",
-                unique: true);
+                column: "RoomId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_RoomId",
@@ -112,9 +125,6 @@ namespace backend.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CheckIns");
-
-            migrationBuilder.DropTable(
                 name: "Employees");
 
             migrationBuilder.DropTable(
@@ -122,6 +132,9 @@ namespace backend.Migrations
 
             migrationBuilder.DropTable(
                 name: "Products");
+
+            migrationBuilder.DropTable(
+                name: "CheckIns");
 
             migrationBuilder.DropTable(
                 name: "Rooms");

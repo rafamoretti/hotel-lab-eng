@@ -2,37 +2,37 @@
 
 namespace backend.Migrations
 {
-    public partial class FixModelCheckIn : Migration
+    public partial class FixRoomModel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Guests_CheckIns_CheckInId",
+                name: "FK_Guests_Rooms_RoomId",
                 table: "Guests");
 
             migrationBuilder.DropIndex(
-                name: "IX_Guests_CheckInId",
+                name: "IX_Guests_RoomId",
                 table: "Guests");
 
             migrationBuilder.DropColumn(
-                name: "CheckInId",
+                name: "RoomId",
                 table: "Guests");
 
             migrationBuilder.AddColumn<int>(
-                name: "GuestsId",
-                table: "CheckIns",
+                name: "GuestId",
+                table: "Rooms",
                 type: "int",
                 nullable: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_CheckIns_GuestsId",
-                table: "CheckIns",
-                column: "GuestsId");
+                name: "IX_Rooms_GuestId",
+                table: "Rooms",
+                column: "GuestId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_CheckIns_Guests_GuestsId",
-                table: "CheckIns",
-                column: "GuestsId",
+                name: "FK_Rooms_Guests_GuestId",
+                table: "Rooms",
+                column: "GuestId",
                 principalTable: "Guests",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
@@ -41,33 +41,33 @@ namespace backend.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_CheckIns_Guests_GuestsId",
-                table: "CheckIns");
+                name: "FK_Rooms_Guests_GuestId",
+                table: "Rooms");
 
             migrationBuilder.DropIndex(
-                name: "IX_CheckIns_GuestsId",
-                table: "CheckIns");
+                name: "IX_Rooms_GuestId",
+                table: "Rooms");
 
             migrationBuilder.DropColumn(
-                name: "GuestsId",
-                table: "CheckIns");
+                name: "GuestId",
+                table: "Rooms");
 
             migrationBuilder.AddColumn<int>(
-                name: "CheckInId",
+                name: "RoomId",
                 table: "Guests",
                 type: "int",
                 nullable: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Guests_CheckInId",
+                name: "IX_Guests_RoomId",
                 table: "Guests",
-                column: "CheckInId");
+                column: "RoomId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Guests_CheckIns_CheckInId",
+                name: "FK_Guests_Rooms_RoomId",
                 table: "Guests",
-                column: "CheckInId",
-                principalTable: "CheckIns",
+                column: "RoomId",
+                principalTable: "Rooms",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
         }

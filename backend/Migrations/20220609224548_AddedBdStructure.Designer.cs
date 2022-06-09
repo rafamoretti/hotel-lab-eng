@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220609202654_FixModelCheckInRelationship")]
-    partial class FixModelCheckInRelationship
+    [Migration("20220609224548_AddedBdStructure")]
+    partial class AddedBdStructure
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -146,11 +146,13 @@ namespace backend.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Model.Room", null)
-                        .WithMany("Guests")
+                    b.HasOne("Model.Room", "Room")
+                        .WithMany()
                         .HasForeignKey("RoomId");
 
                     b.Navigation("CheckIn");
+
+                    b.Navigation("Room");
                 });
 
             modelBuilder.Entity("Model.Product", b =>
@@ -167,8 +169,6 @@ namespace backend.Migrations
 
             modelBuilder.Entity("Model.Room", b =>
                 {
-                    b.Navigation("Guests");
-
                     b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
