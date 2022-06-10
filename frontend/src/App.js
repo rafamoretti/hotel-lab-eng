@@ -14,38 +14,49 @@ function App() {
     password: "admin123"
   }
 
-  const [user, setUser] = useState({email: "admin@admin.com", password: "admin123"});
-  const [error, setError] = useState("");
+  const [user, setUser] = useState({email: "", password: ""});
+  const [error, setError] = useState(""); 
+  let [detail, setDetail] = useState({});
+ /*  let detail = null; */
 
   const login = details => {
     console.log(details);
+    setDetail(details);
+    const ok = false;
+    /* detail = details; */
 
-    if (details.email == adminUser.email && details.password == adminUser.password){
+    /* if (details.email == adminUser.email && details.password == adminUser.password){
       console.log("Sextou");
       setUser({email: details.email});
     } else {
       console.log("Deu não");
       setError("Dados incorretos");
-    }
+    } */
   }
   const logout = () =>{
-    setUser({email: ""});
+    setDetail ({...detail, status: 0});
+    console.log(detail.status);
+    refreshPage();
   }
 
+  function refreshPage() {
+    window.location.reload(false);
+  }
+ 
   return (
     <Router>
       <div className="App">
-        {(user.email != "") ? (
+        {(console.log(detail.status), detail.status === 200) ? (
           <div className="welcome">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/checkin" element={<Checkin />} />
-              <Route path="/checkout" element={<Checkout />} />
-            </Routes>
-            <button className='logout' onClick={logout}>Logout</button>
-          </div>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/checkin" element={<Checkin />} />
+            <Route path="/checkout" element={<Checkout />} />
+          </Routes>
+          <button className='logout' onClick={logout}>Logout</button>
+        </div>
+        
         ) : (
-          
           <div>
             <LoginForm login={login} error={error} /> 
           </div>
