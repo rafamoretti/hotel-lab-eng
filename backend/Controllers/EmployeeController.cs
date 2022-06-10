@@ -46,9 +46,9 @@ namespace Controllers
         }
 
         [HttpGet]
-        [Route("employee/auth")]
+        [Route("employee/auth/{login}")]
         public IActionResult EmployeeLogin(
-            [FromBody] LoginViewModel login
+            [FromRoute] LoginViewModel login
         )
         {
             if (login == null)
@@ -58,7 +58,7 @@ namespace Controllers
             var auth = _loginRepository.GetEmployeeLogin(employeeLogin);
 
             if (auth != false)
-                return Ok();
+                return Ok(auth);
 
             return BadRequest();
         }
